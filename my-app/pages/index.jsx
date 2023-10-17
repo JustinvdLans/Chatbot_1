@@ -1,12 +1,13 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import styles from "./index.module.css";
 
 //Export and render the home page
 export default function Home() {
 
   const [count, setCounter] = useState(0); //Setup a state
-
   const [animalInput, setAnimalInput] = useState("");
+  const [result, setResult] = useState();
 
   async function onSubmit(e) {
     
@@ -39,16 +40,15 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div>
+      <div className={styles.body}>
         <Head>
           <title>Create Next App</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main >
-          <img src='/favicon.ico' />
+        <main className={styles.main}>
+          <img src='/favicon.ico' className={styles.icon}/>
           <h3>Name my pet</h3>
-          <p>You've used this app {count} times</p>
+          <p>You have generated {count} animals</p>
           <form onSubmit={onSubmit}>
             <input
             type= 'text'
@@ -65,8 +65,8 @@ export default function Home() {
             value="Generate names" 
             />
           </form>
+          <div className={styles.result}> {result} </div>
         </main>
       </div>
-    </>
   )
 }

@@ -6,6 +6,17 @@ export default function Home() {
 
   const [count, setCounter] = useState(0); //Setup a state
 
+  const [animalInput, setAnimalInput] = useState("");
+
+  function onSubmit(e) {
+    e.preventDefault()
+    if(count == 10) {
+      return console.log('You have reached your limit')
+    }
+    setCounter(count + 1)
+    setAnimalInput("");
+  }
+
   return (
     <>
       <div>
@@ -17,19 +28,21 @@ export default function Home() {
           <img src='/favicon.ico' />
           <h3>Name my pet</h3>
           <p>You've used this app {count} times</p>
-          <form>
+          <form onSubmit={onSubmit}>
             <input
             type= 'text'
             name= 'animal'
-            placeholder= 'Enter an animal' />
-
-            <input type="submit" onClick={(e) => 
-              {
-                e.preventDefault()
-                if(count == 10) {
-                  return console.log('You have reached your limit')
-                }
-                setCounter(count + 1)}}/>
+            value={animalInput}
+            onChange={(e) => {
+              setAnimalInput(e.target.value)
+              console.log(animalInput)
+            }
+          }
+            placeholder= 'Enter an animal' 
+            />
+            <input type="submit"
+            value="Generate names" 
+            />
           </form>
         </main>
       </div>
